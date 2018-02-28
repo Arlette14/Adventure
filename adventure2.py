@@ -13,7 +13,7 @@ thirdcourt = Room('Third Court', 'You are at the third court of Westfield Plaza 
 playground = Room('Playground', 'You are at the playground.', 'lr')
 jackinthebox = Room('Jack in the Box', 'You are at Jack in the Box.', 'lr')
 starbucks = Room('Starbucks', 'You are at Starbucks.', 'lr')
-forever21 = Room('Forever 21, You are at Forever 21.')
+forever21 = Room('Forever 21', 'You are at Forever 21.', 'lr')
 
 
 entrance.add_connection(centercourt, "passage", ["west", "w"])
@@ -34,6 +34,14 @@ secondcourt.add_connection(jcpenny, "passage", ["south", "s"])
 jcpenny.add_connection(secondcourt, "passage", ["north", "n"])
 jcpenny.add_connection(playground, "passage", ["west", "w"])
 playground.add_connection(jcpenny, "passage", ["east", "e"])
+centercourt.add_connection(thirdcourt, "passage", ["north", "n"])
+thirdcourt.add_connection(centercourt, "passage", ["south", "s"])
+thirdcourt.add_connection(jackinthebox, "passage", ["northwest", "nw"])
+jackinthebox.add_connection(thirdcourt, "passage", ["southeast", "se"])
+thirdcourt.add_connection(starbucks, "passage", ["north", "n"])
+starbucks.add_connection(thirdcourt, "passage", ["south", "s"])
+thirdcourt.add_connection(forever21, "passage", ["northeast", "ne"])
+forever21.add_connection(thirdcourt, "passage", ["southwest", "sw"])
 
 
 
