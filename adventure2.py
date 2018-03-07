@@ -1,19 +1,19 @@
-from Adventure import Room
-entrance = Room('entrance', 'You are at the entrance of Westfield Plaza Bonita.', 'k')
+from Adventure import Room, Inventory, DarkRoom, Flashlight
+entrance = Room('Entrance', 'You are at the entrance of Westfield Plaza Bonita. Be careful its dark!', 'k')
 centercourt = Room('Center Court', 'You are at the center of Westfield Plaza Bonita.', 'h')
-footlocker = Room('Foot Locker', 'You are at Foot Locker.', 'd')
-nyxstore = Room('Nyx Store', 'You are at the NYX Store.', 'uh')
-hollister = Room('Hollister', 'You are at Hollister.', 'b1')
-pinkstore = Room('PINK Store', 'You are at the PINK Store.', 'b2')
-secondcourt = Room('Second Court', 'You are at the second court of Westfield Plaza Bonita.', 'b3')
-arcade = Room('Arcade', 'You are at the Arcade.', 'lr')
-amc = Room('AMC', 'You are inside AMC.', 'lr')
-jcpenny = Room('JCPenny', 'You are at JCPenny.', 'lr')
+footlocker = DarkRoom('Foot Locker', 'You are at Foot Locker.', 'd')
+nyxstore = DarkRoom('Nyx Store', 'You are at the NYX Store.', 'uh')
+hollister = DarkRoom('Hollister', 'You are at Hollister.', 'b1')
+pinkstore = DarkRoom('PINK Store', 'You are at the PINK Store.', 'b2')
+secondcourt = DarkRoom('Second Court', 'You are at the second court of Westfield Plaza Bonita.', 'b3')
+arcade = DarkRoom('Arcade', 'You are at the Arcade.', 'lr')
+amc = DarkRoom('AMC', 'You are inside AMC.', 'lr')
+jcpenny = DarkRoom('JCPenny', 'You are at JCPenny.', 'lr')
 thirdcourt = Room('Third Court', 'You are at the third court of Westfield Plaza Bonita.', 'lr')
-playground = Room('Playground', 'You are at the playground.', 'lr')
-jackinthebox = Room('Jack in the Box', 'You are at Jack in the Box.', 'lr')
-starbucks = Room('Starbucks', 'You are at Starbucks.', 'lr')
-forever21 = Room('Forever 21', 'You are at Forever 21.', 'lr')
+playground = DarkRoom('Playground', 'You are at the playground.', 'lr')
+jackinthebox = DarkRoom('Jack in the Box', 'You are at Jack in the Box.', 'lr')
+starbucks = DarkRoom('Starbucks', 'You are at Starbucks.', 'lr')
+forever21 = DarkRoom('Forever 21', 'You are at Forever 21.', 'lr')
 
 
 entrance.add_connection(centercourt, "passage", ["west", "w"])
@@ -43,6 +43,8 @@ starbucks.add_connection(thirdcourt, "passage", ["south", "s"])
 thirdcourt.add_connection(forever21, "passage", ["northeast", "ne"])
 forever21.add_connection(thirdcourt, "passage", ["southwest", "sw"])
 
+centercourt.add_item(Flashlight())
+
 
 
 
@@ -60,19 +62,6 @@ forever21.add_connection(thirdcourt, "passage", ["southwest", "sw"])
 #bedroom1.add_room('s', hallway2)
 #bedroom2.add_room('w', hallway2)
 #bedroom3.add_room('e', hallway2)
-
-current_room = entrance
-current_room.enter_room()
-
-while True:
-    direction = raw_input("What direction do you want to go?")
-    if (current_room.is_valid_direction(direction)):
-        current_room =current_room.next_room(direction)
-        current_room.enter_room()
-    elif direction == 'x':
-        break
-    else:
-        print "Ouch! You ran into a wall."
 
 
 
@@ -94,7 +83,8 @@ while True:
         print result
         continue
 
-    else:
+    result = inventory.process_command(command)
+    if len(result) == 0:
         print "I don't know what you mean"
 
 
