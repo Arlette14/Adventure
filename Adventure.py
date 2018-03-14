@@ -148,3 +148,11 @@ class DarkRoom(Room):
             print ("You were caught by the security guard.")
             print ("Game over.")
             exit()
+
+class Food(Item):
+    def __init__(self, name):
+        Item.__init__(self, name)
+        self.known_commands["eat"] = self.eat
+
+    def eat(self, command):
+        print ("You just ate a " + self.name + ".")

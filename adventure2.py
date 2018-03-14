@@ -1,4 +1,4 @@
-from Adventure import Room, Inventory, DarkRoom, Flashlight
+from Adventure import Room, Inventory, DarkRoom, Flashlight, Item, Food
 entrance = Room('Entrance', 'You are at the entrance of Westfield Plaza Bonita. Be careful its dark!', 'k')
 centercourt = Room('Center Court', 'You are at the center of Westfield Plaza Bonita.', 'h')
 footlocker = DarkRoom('Foot Locker', 'You are at Foot Locker.', 'd')
@@ -9,7 +9,7 @@ secondcourt = DarkRoom('Second Court', 'You are at the second court of Westfield
 arcade = DarkRoom('Arcade', 'You are at the Arcade.', 'lr')
 amc = DarkRoom('AMC', 'You are inside AMC.', 'lr')
 jcpenny = DarkRoom('JCPenny', 'You are at JCPenny.', 'lr')
-thirdcourt = Room('Third Court', 'You are at the third court of Westfield Plaza Bonita.', 'lr')
+thirdcourt = DarkRoom('Third Court', 'You are at the third court of Westfield Plaza Bonita.', 'lr')
 playground = DarkRoom('Playground', 'You are at the playground.', 'lr')
 jackinthebox = DarkRoom('Jack in the Box', 'You are at Jack in the Box.', 'lr')
 starbucks = DarkRoom('Starbucks', 'You are at Starbucks.', 'lr')
@@ -44,7 +44,10 @@ thirdcourt.add_connection(forever21, "passage", ["northeast", "ne"])
 forever21.add_connection(thirdcourt, "passage", ["southwest", "sw"])
 
 centercourt.add_item(Flashlight())
-
+nyxstore.add_item(Item("lipstick"))
+jcpenny.add_item(Item("knife"))
+jackinthebox.add_item(Food("croissant"))
+#
 
 
 
