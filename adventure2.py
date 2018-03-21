@@ -1,4 +1,5 @@
-from Adventure import Room, Inventory, DarkRoom, Flashlight, Item, Food
+from Adventure import Room, Inventory, DarkRoom, Flashlight, Item, Food, SecurityGuard
+
 entrance = Room('Entrance', 'You are at the entrance of Westfield Plaza Bonita. Be careful its dark!', 'k')
 centercourt = Room('Center Court', 'You are at the center of Westfield Plaza Bonita.', 'h')
 footlocker = DarkRoom('Foot Locker', 'You are at Foot Locker.', 'd')
@@ -44,11 +45,14 @@ thirdcourt.add_connection(forever21, "passage", ["northeast", "ne"])
 forever21.add_connection(thirdcourt, "passage", ["southwest", "sw"])
 
 centercourt.add_item(Flashlight())
+amc.add_item(Item("tazer"))
+hollister.add_item(Item("knife"))
 nyxstore.add_item(Item("lipstick"))
-jcpenny.add_item(Item("knife"))
 jackinthebox.add_item(Food("croissant"))
-#
-
+jcpenny.add_item(Item("perfume"))
+guards= [SecurityGuard(), SecurityGuard()]
+jackinthebox.add_guard(guards[0])
+jackinthebox.add_guard(guards[1])
 
 
 
@@ -73,6 +77,8 @@ current_room = entrance
 current_room.enter_room(inventory)
 
 while True:
+    for guard in guards:
+        guard.move()
     current_room.enter_room(inventory)
     command = raw_input("What would you like to do?")
     if command in ("exit", "x", "quit", "q"):

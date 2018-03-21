@@ -50,6 +50,7 @@ class Room():
         self.items = []
         self.connectors= []
         self.rooms = {}
+        self.guards = []
 
     def add_item(self,item):
         self.items.append(item)
@@ -76,6 +77,10 @@ class Room():
                  print ("You see a " + item.name + " here.")
         print
 
+        if len(self.guards)>0:
+            print "You see guard here"
+            print
+
     def get_name(self):
         return self.name
 
@@ -99,6 +104,9 @@ class Room():
                    return "I don't know what you want to pick up."
        else:
            return None
+
+    def add_guard(self, guard):
+        self.guards.append(guard)
 
 
 class LightSource(Item):
@@ -149,6 +157,8 @@ class DarkRoom(Room):
             print ("Game over.")
             exit()
 
+
+
 class Food(Item):
     def __init__(self, name):
         Item.__init__(self, name)
@@ -156,3 +166,21 @@ class Food(Item):
 
     def eat(self, command):
         print ("You just ate a " + self.name + ".")
+
+class SecurityGuard():
+    def __init__(self, name):
+        self.name = name
+        self.known_commands = {}
+        self.known_commands["Attack"] = self.kill
+        self.known_commands["Kill"] = self.kill
+
+    def kill(self, command):
+        print ("You just killed the " + self.name + ".")
+
+    def get_name(self):
+        return self.name
+
+    def process_command(self, command):
+        for a_command in self.known_commands:
+            if a_command in command:
+                self.known_commands[a_command](command)
