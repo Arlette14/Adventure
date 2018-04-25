@@ -102,6 +102,11 @@ class Room():
                    return "You picked up the "+item.name+"."
                else:
                    return "I don't know what you want to pick up."
+       elif len(self.guards)>0 and "kill" in command:
+           for guard in self.guards:
+                guard.kill(command,self,inventory)
+           return "You just killed the guard."
+
        else:
            return None
 
@@ -171,11 +176,12 @@ class SecurityGuard():
     def __init__(self, name):
         self.name = name
         self.known_commands = {}
-        self.known_commands["Attack"] = self.kill
         self.known_commands["Kill"] = self.kill
 
-    def kill(self, command):
-        print ("You just killed the " + self.name + ".")
+    def kill(self, command,room,inventory):
+        room.guards.remove(self)
+        return ("You just killed the " + self.name + ".")
+
 
     def get_name(self):
         return self.name
@@ -184,3 +190,24 @@ class SecurityGuard():
         for a_command in self.known_commands:
             if a_command in command:
                 self.known_commands[a_command](command)
+
+            if Item.(Item):
+                Room.enter_room(self, Item)
+
+
+            else:
+                print ("You were caught by the security guard.")
+                print ("Game over.")
+                exit()
+
+    def move(self):
+        pass
+
+    class Knife(Item):
+        def __init__(self, name="knife"):
+            Item.__init__(self, name)
+
+
+    class Tazor(Item):
+        def __init__(self, name="Tazor"):
+            Item.__init__(self, name)
