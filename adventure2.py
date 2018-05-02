@@ -1,4 +1,4 @@
-from Adventure import Room, Inventory, DarkRoom, Flashlight, Item, Food, SecurityGuard, Knife
+from Adventure import Room, Inventory, DarkRoom, Flashlight, Item, Food, SecurityGuard, Knife, Tazer
 
 entrance = Room('Entrance', 'You are at the entrance of Westfield Plaza Bonita. Be careful its dark!', 'k')
 centercourt = Room('Center Court', 'You are at the center of Westfield Plaza Bonita.', 'h')
@@ -46,8 +46,8 @@ forever21.add_connection(thirdcourt, "path to the Third Court", ["southwest", "s
 
 
 centercourt.add_item(Flashlight())
-amc.add_item(Item("tazer"))
-hollister.add_item(Item("knife"))
+amc.add_item(Tazer("tazer"))
+hollister.add_item(Knife("knife"))
 jackinthebox.add_item(Food("croissant"))
 jcpenny.add_item(Item("perfume"))
 guards= [SecurityGuard("Security Guard #1"), SecurityGuard("Security Guard #2")]
@@ -95,8 +95,4 @@ while True:
     result = inventory.process_command(command)
     if len(result) == 0:
         print "I don't know what you mean"
-
-
-
-
 

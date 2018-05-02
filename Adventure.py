@@ -80,6 +80,8 @@ class Room():
         if len(self.guards)>0:
             print "You see guard here"
             print
+            for guard in self.guards:
+                guard.catch(inventory)
 
     def get_name(self):
         return self.name
@@ -140,6 +142,7 @@ class LightSource(Item):
         self.on = False
         print ("The " + self.name + " is off.")
 
+
 class Flashlight(LightSource):
     def __init__(self, name="flashlight", battery_level=100, on=False):
         LightSource.__init__(self, name, on)
@@ -152,6 +155,7 @@ class Flashlight(LightSource):
         # Compute the time it's been on and then drain the battery an equal amount
         pass
 
+
 class DarkRoom(Room):
     def enter_room(self, inventory):
         light_sources = inventory.get(LightSource)
@@ -163,7 +167,6 @@ class DarkRoom(Room):
             exit()
 
 
-
 class Food(Item):
     def __init__(self, name):
         Item.__init__(self, name)
@@ -171,6 +174,21 @@ class Food(Item):
 
     def eat(self, command):
         print ("You just ate a " + self.name + ".")
+
+
+class Weapon(Item):
+    def __init__(self, name="Weapon"):
+        Item.__init__(self, name)
+
+class Knife(Weapon):
+    def __init__(self, name="knife"):
+        Item.__init__(self, name)
+
+class Tazer(Weapon):
+    def __init__(self, name="tazer"):
+        Item.__init__(self, name)
+
+
 
 class SecurityGuard():
     def __init__(self, name):
@@ -191,7 +209,7 @@ class SecurityGuard():
             if a_command in command:
                 self.known_commands[a_command](command)
 
-            if Item.(Item):
+            if Item.self(Item):
                 Room.enter_room(self, Item)
 
 
@@ -200,14 +218,13 @@ class SecurityGuard():
                 print ("Game over.")
                 exit()
 
+    def catch(self, inventory):
+        weapons = inventory.get(Weapon)
+        if len(weapons)== 0:
+            print ("You were caught by the security guard.")
+            print ("Game over.")
+            exit()
+
+
     def move(self):
         pass
-
-    class Knife(Item):
-        def __init__(self, name="knife"):
-            Item.__init__(self, name)
-
-
-    class Tazor(Item):
-        def __init__(self, name="Tazor"):
-            Item.__init__(self, name)
